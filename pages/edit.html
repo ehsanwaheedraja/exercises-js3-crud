@@ -1,0 +1,69 @@
+<DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>edit</title>
+
+      <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous"
+      />
+    </head>
+
+    <body>
+      <div class="h1 text-center">Edit Form</div>
+      <div class="container">
+        <form>
+          <div class="form-group">
+            <label for="title">title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="id_title"
+              placeholder="title"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="link">href</label>
+            <input
+              type="link"
+              class="form-control"
+              id="id_href"
+              placeholder="href"
+            />
+          </div>
+
+          <button type="button" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <script>
+        const varrr = window.location.href;
+        var idx = varrr.indexOf("=") + 1;
+        var idx2 = varrr.length;
+        var myId = varrr.substring(idx, idx2); //to get id from url
+        console.log(myId);
+        fetch("../json/list.json")
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            data.forEach((item) => {
+              console.log(item.id.includes(myId));
+
+              if (item.id.includes(myId)) {
+                console.log(item.title);
+                var titileInput = document.getElementById("id_title");
+                titileInput.value = item.title;
+                var hrefInput = document.getElementById("id_href");
+                hrefInput.value = item.href;
+              }
+            });
+          });
+      </script>
+    </body>
+  </html></DOCTYPE
+>
